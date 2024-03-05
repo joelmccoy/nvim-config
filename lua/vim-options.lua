@@ -4,5 +4,11 @@ vim.cmd("set expandtab")
 vim.cmd("set tabstop=" .. tabs)
 vim.cmd("set softtabstop=" .. tabs)
 vim.cmd("set shiftwidth=" .. tabs)
-vim.cmd("set rnu")
+vim.cmd("set nu")
 vim.g.mapleader = " "
+
+-- set remaps
+
+-- moves text up / down
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
