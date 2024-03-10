@@ -15,3 +15,6 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- add file types
 vim.filetype.add({ extension = { templ = "templ" } })
+
+-- enable system clipboard
+vim.api.nvim_set_option("clipboard", "unnamed")
