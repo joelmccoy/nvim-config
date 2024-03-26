@@ -15,6 +15,7 @@ return {
 					"gopls",
 					"pyright",
 					"templ",
+					"tailwindcss",
 				},
 			})
 		end,
@@ -67,6 +68,10 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.templ.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+			})
+			lspconfig.tailwindcss.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
