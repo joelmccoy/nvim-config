@@ -16,6 +16,7 @@ return {
 					"pyright",
 					"templ",
 					"tailwindcss",
+					"jsonls",
 				},
 			})
 		end,
@@ -72,6 +73,10 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.tailwindcss.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+			})
+			lspconfig.jsonls.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
