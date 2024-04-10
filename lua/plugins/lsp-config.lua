@@ -17,6 +17,8 @@ return {
 					"templ",
 					"tailwindcss",
 					"jsonls",
+					"terraformls",
+					"tflint",
 				},
 			})
 		end,
@@ -77,6 +79,11 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.jsonls.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+			})
+			lspconfig.terraformls.setup({})
+			lspconfig.tflint.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})

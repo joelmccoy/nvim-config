@@ -15,6 +15,7 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- add file types
 vim.filetype.add({ extension = { templ = "templ" } })
+vim.filetype.add({ extension = { tf = "terraform" } })
 
 -- enable system clipboard
 vim.api.nvim_set_option("clipboard", "unnamed")
