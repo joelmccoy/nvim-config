@@ -19,7 +19,7 @@ return {
           "jsonls",
           "terraformls",
           "tflint",
-          "typos-lsp"
+          "typos_lsp"
         },
       })
     end,
