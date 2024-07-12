@@ -20,7 +20,8 @@ return {
           "terraformls",
           "tflint",
           "typos_lsp",
-          "yamlls"
+          "yamlls",
+          "helm_ls"
         },
       })
     end,
@@ -133,6 +134,10 @@ return {
         validate = true,
         completion = true,
         hover = true,
+      })
+      lspconfig.helm_ls.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
       })
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
