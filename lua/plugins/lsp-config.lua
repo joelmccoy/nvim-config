@@ -16,7 +16,7 @@ return {
           "pyright",
           "templ",
           "tailwindcss",
-          "jsonls",
+          -- "jsonls",
           "terraformls",
           "tflint",
           "typos_lsp",
@@ -82,10 +82,10 @@ return {
         on_attach = on_attach,
         capabilities = capabilities,
       })
-      lspconfig.jsonls.setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-      })
+      -- lspconfig.jsonls.setup({
+      --   on_attach = on_attach,
+      --   capabilities = capabilities,
+      -- })
       lspconfig.terraformls.setup({
         on_attach = on_attach,
         capabilities = capabilities,
