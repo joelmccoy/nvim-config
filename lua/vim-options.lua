@@ -5,6 +5,7 @@ vim.cmd("set tabstop=" .. tabs)
 vim.cmd("set softtabstop=" .. tabs)
 vim.cmd("set shiftwidth=" .. tabs)
 vim.cmd("set nu")
+vim.cmd([[autocmd FileType terraform setlocal commentstring=#\ %s]])
 vim.g.mapleader = " "
 
 -- set remaps
