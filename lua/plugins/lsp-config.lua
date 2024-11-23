@@ -14,8 +14,8 @@ return {
           "lua_ls",
           "gopls",
           "pyright",
-          "templ",
-          "tailwindcss",
+          -- "templ",
+          -- "tailwindcss",
           -- "jsonls",
           "terraformls",
           "tflint",
@@ -42,7 +42,7 @@ return {
         vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, bufopts)
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+        vim.keymap.set("n", "<c-K>", vim.lsp.buf.hover, bufopts)
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
         vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
         vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
@@ -140,7 +140,6 @@ return {
         capabilities = capabilities,
       })
 
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
       vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
 
