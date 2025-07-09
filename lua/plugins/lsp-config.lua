@@ -10,13 +10,13 @@ return {
     config = function()
       require("mason-lspconfig").setup({
         ensure_installed = {
-          "ruff_lsp",
           "lua_ls",
           "gopls",
           "pyright",
           -- "templ",
           -- "tailwindcss",
           -- "jsonls",
+          "ts_ls",
           "terraformls",
           "tflint",
           "typos_lsp",
@@ -62,10 +62,6 @@ return {
         on_attach = on_attach,
         capabilities = capabilities,
       })
-      lspconfig.ruff_lsp.setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-      })
       lspconfig.gopls.setup({
         on_attach = on_attach,
         capabilities = capabilities,
@@ -86,6 +82,10 @@ return {
       --   on_attach = on_attach,
       --   capabilities = capabilities,
       -- })
+      lspconfig.ts_ls.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
       lspconfig.terraformls.setup({
         on_attach = on_attach,
         capabilities = capabilities,
