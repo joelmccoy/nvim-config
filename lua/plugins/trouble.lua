@@ -1,25 +1,38 @@
 return {
 	"folke/trouble.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	config = function()
-		-- Lua
-		vim.keymap.set("n", "<leader>xx", function()
-			require("trouble").toggle()
-		end)
-		vim.keymap.set("n", "<leader>xw", function()
-			require("trouble").toggle("workspace_diagnostics")
-		end)
-		vim.keymap.set("n", "<leader>xd", function()
-			require("trouble").toggle("document_diagnostics")
-		end)
-		vim.keymap.set("n", "<leader>xq", function()
-			require("trouble").toggle("quickfix")
-		end)
-		vim.keymap.set("n", "<leader>xl", function()
-			require("trouble").toggle("loclist")
-		end)
-		vim.keymap.set("n", "gR", function()
-			require("trouble").toggle("lsp_references")
-		end)
-	end,
+	cmd = "Trouble", -- Lazy-loads on :Trouble command
+	keys = {
+		{
+			"<leader>xx",
+			"<cmd>Trouble diagnostics toggle<cr>",
+			desc = "Toggle Trouble: Document Diagnostics",
+			mode = "n",
+		},
+		{
+			"<leader>xw",
+			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+			desc = "Toggle Trouble: Workspace Diagnostics",
+			mode = "n",
+		},
+		{
+			"<leader>xq",
+			"<cmd>Trouble qflist toggle<cr>",
+			desc = "Toggle Trouble: Quickfix",
+			mode = "n",
+		},
+		{
+			"<leader>xl",
+			"<cmd>Trouble loclist toggle<cr>",
+			desc = "Toggle Trouble: Loclist",
+			mode = "n",
+		},
+		{
+			"gR",
+			"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+			desc = "LSP References (Trouble)",
+			mode = "n",
+		},
+	},
+	opts = {}, -- required by trouble.nvim now
 }
