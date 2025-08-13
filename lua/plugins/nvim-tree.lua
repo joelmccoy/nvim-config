@@ -13,8 +13,22 @@ return {
 			view = {
 				width = 30,
 			},
+			modified = {
+				enable = true,
+				show_on_dirs = true,
+				show_on_open_dirs = true,
+			},
 			renderer = {
 				group_empty = true,
+				highlight_modified = "all", -- highlight modified files in both folders and file list
+				icons = {
+					show = {
+						modified = true, -- show the modified indicator
+					},
+					glyphs = {
+						modified = "●", -- symbol to show for unsaved files (pick any you like)
+					},
+				},
 			},
 		})
 	end,
