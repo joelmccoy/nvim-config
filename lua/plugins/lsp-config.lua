@@ -35,7 +35,6 @@ return {
 		"neovim/nvim-lspconfig",
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			local lspconfig = require("lspconfig")
 
 			local on_attach = function(client, bufnr)
 				-- Enable completion triggered by <c-x><c-o>
@@ -63,87 +62,79 @@ return {
 				end, bufopts)
 			end
 
-			lspconfig.lua_ls.setup({
+			-- Configure LSP servers using vim.lsp.config
+			vim.lsp.config("lua_ls", {
+				cmd = { "lua-language-server" },
+				filetypes = { "lua" },
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
-			lspconfig.gopls.setup({
+			vim.lsp.config("gopls", {
+				cmd = { "gopls" },
+				filetypes = { "go", "gomod", "gowork", "gotmpl" },
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
-			lspconfig.pyright.setup({
+			vim.lsp.config("pyright", {
+				cmd = { "pyright-langserver", "--stdio" },
+				filetypes = { "python" },
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
-			lspconfig.templ.setup({
+			vim.lsp.config("templ", {
+				cmd = { "templ", "lsp" },
+				filetypes = { "templ" },
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
-			lspconfig.tailwindcss.setup({
+			vim.lsp.config("tailwindcss", {
+				cmd = { "tailwindcss-language-server", "--stdio" },
+				filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte" },
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
-			-- lspconfig.jsonls.setup({
-			--   on_attach = on_attach,
-			--   capabilities = capabilities,
-			-- })
-			lspconfig.ts_ls.setup({
+			vim.lsp.config("ts_ls", {
+				cmd = { "typescript-language-server", "--stdio" },
+				filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
-			lspconfig.terraformls.setup({
+			vim.lsp.config("terraformls", {
+				cmd = { "terraform-ls", "serve" },
+				filetypes = { "terraform", "terraform-vars" },
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
-			lspconfig.tflint.setup({
+			vim.lsp.config("tflint", {
+				cmd = { "tflint", "--langserver" },
+				filetypes = { "terraform" },
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
-			lspconfig.typos_lsp.setup({
+			vim.lsp.config("typos_lsp", {
+				cmd = { "typos-lsp" },
+				filetypes = { "*" },
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
-			-- lspconfig.yamlls.setup({
-			--   on_attach = on_attach,
-			--   capabilities = capabilities,
-			--   schemaStore = {
-			--     enable = true,
-			--     url = "https://www.schemastore.org/api/json/catalog.json",
-			--   },
-			--   schemas = {
-			--     ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
-			--     ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
-			--     ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"] =
-			--     "azure-pipelines.{yml,yaml}",
-			--     ["https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/tasks"] =
-			--     "roles/tasks/*.{yml,yaml}",
-			--     ["https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/playbook"] =
-			--     "*play*.{yml,yaml}",
-			--     ["http://json.schemastore.org/prettierrc"] = ".prettierrc.{yml,yaml}",
-			--     ["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
-			--     ["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
-			--     ["https://json.schemastore.org/dependabot-v2"] = ".github/dependabot.{yml,yaml}",
-			--     ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] =
-			--     "*gitlab-ci*.{yml,yaml}",
-			--     ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json"] =
-			--     "*api*.{yml,yaml}",
-			--     ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] =
-			--     "*docker-compose*.{yml,yaml}",
-			--     ["https://raw.githubusercontent.com/argoproj/argo-workflows/master/api/jsonschema/schema.json"] =
-			--     "*flow*.{yml,yaml}",
-			--     ["https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.12.0/uds.schema.json"] = "uds-bundle.yaml",
-			--     ["https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.12.0/tasks.schema.json"] = "tasks.yaml",
-			--     ["https://raw.githubusercontent.com/defenseunicorns/uds-cli/v0.12.0/zarf.schema.json"] = "zarf.yaml",
-			--   },
-			--   format = { enabled = true },
-			--   validate = true,
-			--   completion = true,
-			--   hover = true,
-			-- })
-			lspconfig.helm_ls.setup({
+			vim.lsp.config("helm_ls", {
+				cmd = { "helm_ls", "serve" },
+				filetypes = { "helm" },
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
+
+			-- Enable all configured LSP servers
+			vim.lsp.enable("lua_ls")
+			vim.lsp.enable("gopls")
+			vim.lsp.enable("pyright")
+			vim.lsp.enable("templ")
+			vim.lsp.enable("tailwindcss")
+			vim.lsp.enable("ts_ls")
+			vim.lsp.enable("terraformls")
+			vim.lsp.enable("tflint")
+			vim.lsp.enable("typos_lsp")
+			vim.lsp.enable("helm_ls")
 
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
 			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
