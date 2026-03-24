@@ -6,9 +6,27 @@ return {
 			mux = {
 				backend = "tmux",
 				enabled = true,
+				create = "window", -- use tmux windows instead of nvim terminals
 			},
 		},
 	},
+	init = function()
+		-- After any sidekick send, auto-focus the tmux pane
+		local State = require("sidekick.cli.state")
+		local orig_send = require("sidekick.cli").send
+		require("sidekick.cli").send = function(opts)
+			orig_send(opts)
+			vim.defer_fn(function()
+				State.with(function(state)
+					local pane_id = state.session and state.session.tmux_pane_id
+					if pane_id then
+						vim.fn.system({ "tmux", "select-window", "-t", pane_id })
+						vim.fn.system({ "tmux", "select-pane", "-t", pane_id })
+					end
+				end, { attach = false, focus = false, show = false })
+			end, 100)
+		end
+	end,
 	keys = {
 		{
 			"<tab>",
