@@ -51,6 +51,16 @@ return {
 			"<leader>aa",
 			function()
 				require("sidekick.cli").toggle()
+				local State = require("sidekick.cli.state")
+				vim.defer_fn(function()
+					State.with(function(state)
+						local pane_id = state.session and state.session.tmux_pane_id
+						if pane_id then
+							vim.fn.system({ "tmux", "select-window", "-t", pane_id })
+							vim.fn.system({ "tmux", "select-pane", "-t", pane_id })
+						end
+					end, { attach = false, focus = false, show = false })
+				end, 100)
 			end,
 			desc = "Sidekick Toggle CLI",
 		},
