@@ -1,18 +1,32 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+  branch = "main",
+  lazy = false,
   build = ":TSUpdate",
   config = function()
-    local config = require("nvim-treesitter.configs")
-    config.setup({
-      auto_install = true,
-      highlight = { enable = true },
-      indent = { enable = true },
-      ensure_installed = { "terraform" },
+    require("nvim-treesitter").setup({
+      install_dir = vim.fn.stdpath("data") .. "/site",
     })
-    -- Autocommand to treat .tofu files as terraform files
+
+    local ensure_installed = {
+      "bash", "c", "cpp", "css", "go", "html", "javascript", "json",
+      "lua", "markdown", "markdown_inline", "python", "query", "regex",
+      "rust", "terraform", "tsx", "typescript", "vim", "vimdoc", "yaml",
+    }
+    require("nvim-treesitter").install(ensure_installed)
+
+    vim.api.nvim_create_autocmd("FileType", {
+      callback = function(args)
+        local lang = vim.treesitter.language.get_lang(vim.bo[args.buf].filetype)
+        if lang and pcall(vim.treesitter.start, args.buf, lang) then
+          vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end
+      end,
+    })
+
     vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
       pattern = "*.tofu",
-      command = "setfiletype terraform"
+      command = "setfiletype terraform",
     })
   end,
 }

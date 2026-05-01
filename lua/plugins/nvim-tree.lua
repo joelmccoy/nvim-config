@@ -7,6 +7,10 @@ return {
 		vim.keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>", { silent = true })
 
 		require("nvim-tree").setup({
+			update_focused_file = {
+				enable = true,
+				update_root = false,
+			},
 			filters = {
 				dotfiles = false, -- show dotfiles (like hide_dotfiles = false in Neo-tree)
 			},
