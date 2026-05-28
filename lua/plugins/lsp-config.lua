@@ -163,7 +163,7 @@ return {
 			vim.lsp.enable("tflint")
 			vim.lsp.enable("typos_lsp")
 			vim.lsp.enable("helm_ls")
-			vim.lsp.enable("copilot")
+			-- vim.lsp.enable("copilot")
 
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
 			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
