@@ -40,24 +40,6 @@ return {
 				-- Enable completion triggered by <c-x><c-o>
 				vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
-				-- Copilot inline completion support
-				if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion, bufnr) then
-					vim.lsp.inline_completion.enable(true, { bufnr = bufnr })
-
-					vim.keymap.set(
-						'i',
-						'<C-F>',
-						vim.lsp.inline_completion.get,
-						{ desc = 'LSP: accept inline completion', buffer = bufnr }
-					)
-					vim.keymap.set(
-						'i',
-						'<C-G>',
-						vim.lsp.inline_completion.select,
-						{ desc = 'LSP: switch inline completion', buffer = bufnr }
-					)
-				end
-
 				-- Mappings.
 				-- See `:help vim.lsp.*` for documentation on any of the below functions
 				local bufopts = { noremap = true, silent = true, buffer = bufnr }
@@ -163,7 +145,6 @@ return {
 			vim.lsp.enable("tflint")
 			vim.lsp.enable("typos_lsp")
 			vim.lsp.enable("helm_ls")
-			-- vim.lsp.enable("copilot")
 
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
 			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
